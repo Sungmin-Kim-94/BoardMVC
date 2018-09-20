@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.itedu.boardmvc.action.Action;
+import kr.itedu.boardmvc.action.BoardDeleteAction;
 import kr.itedu.boardmvc.action.BoardDetailAction;
 import kr.itedu.boardmvc.action.BoardInsertAction;
 import kr.itedu.boardmvc.action.BoardListAction;
@@ -85,7 +86,19 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (comd.equals("/boardDelete.bo")) {
-			
+			action = new BoardDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (ServletException e) {
+				// TODO: ServletException 예외 처리
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO: IOException 예외 처리
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: Exception 예외 처리
+				e.printStackTrace();
+			}
 		}
 		
 		if (forward != null) {

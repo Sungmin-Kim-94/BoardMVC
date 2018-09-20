@@ -172,7 +172,17 @@ public class BoardDAO {
 		
 		try {
 			con = getConn();
-			String query = String.format("", btype);
+			String query = String.format(""
+					+ " DELETE FROM T_BOARD%d ", btype);
+			
+			if (bid > 0) {
+				query += " WHERE BID = ? ";
+			}
+			ps = con.prepareStatement(query);
+			if (bid > 0) {
+				ps.setInt(1, bid);
+			}
+			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO: SQLException 예외 처리
 		} catch (Exception e) {
