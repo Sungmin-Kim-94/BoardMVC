@@ -25,13 +25,23 @@ public class BoardListAction implements Action {
 		// 필요한 데이터 가져오기
 		BoardListService service = new BoardListService();
 		int btype = Utils.getParamInt(request.getParameter("btype"));
-		ArrayList<BoardVO> data = service.getBoardList(btype);
+		int pageNum = Utils.getParamInt(request.getParameter("pnum"));
+		if (pageNum <= 0) {
+			pageNum = 1;
+		}
+		int viewCnt = Utils.getParamInt(request.getParameter("pcnt"));
+		if (viewCnt <= 0) {
+			viewCnt = 10;
+		}
+		ArrayList<BoardVO> data = service.getBoardList(btype, viewCnt, pageNum);
+		int pageCnt = (int) Math.ceil(service.getListCount(btype) / (viewCnt * 1.0f));
 		
 		// request에 값 저장
 		request.setAttribute("title", Var.TITLES[btype]);
 		request.setAttribute("content", "boardList");
 		request.setAttribute("btype", btype);
 		request.setAttribute("data", data);
+		request.setAttribute("pcnt", pageCnt);
 
 		return forward;
 	}

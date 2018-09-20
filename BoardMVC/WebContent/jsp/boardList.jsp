@@ -22,6 +22,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<c:forEach begin="1" end="${pcnt}" step="1" varStatus="status">
+				<a href="boardList.bo?btype=${btype}&pnum=${status.count}">${status.count}</a>
+			</c:forEach>
 		</div>
 	</c:when>
 	<c:otherwise>

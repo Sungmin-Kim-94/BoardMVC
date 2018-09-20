@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 
 import kr.itedu.boardmvc.BoardVO;
@@ -41,6 +42,112 @@ public class BoardDAO {
 		}
 		return dao;
 	}
+	
+	public int getListCount(int btype) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		StringBuffer query = new StringBuffer();
+		query.append("\n SELECT ");
+		query.append("\n     COUNT(BID) AS COUNT ");
+		query.append("\n FROM T_BOARD").append(btype);
+		
+		try {
+			con = getConn();
+			ps = con.prepareStatement(query.toString());
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				result = rs.getInt("COUNT");
+			}
+		} catch (SQLSyntaxErrorException e) {
+			System.out.println(query.toString());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO: SQLException 예외 처리
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: Exception 예외 처리
+			e.printStackTrace();
+		} finally {
+			close(con, ps, rs);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param btype 테이블 번호
+	 * @param pageCnt 한 페이지당 보여지는 게시글 수
+	 * @param pageNum 페이지 번호
+	 * @return
+	 */
+	public ArrayList<BoardVO> getBoardList(int btype, int viewCnt, int pageNum) {
+		ArrayList<BoardVO> result = new ArrayList<BoardVO>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int maxPageNum = viewCnt * pageNum;
+		int minPageNum = 1 + ((pageNum - 1) * viewCnt);
+		
+		StringBuffer subQuery1 = new StringBuffer();
+		subQuery1.append("\n SELECT ");
+		subQuery1.append("\n     BID, ");
+		subQuery1.append("\n     BTITLE, ");
+		subQuery1.append("\n     BREGDATE ");
+		subQuery1.append("\n FROM T_BOARD").append(btype);
+		subQuery1.append("\n ORDER BY BID DESC ");
+		
+		StringBuffer subQuery2 = new StringBuffer();
+		subQuery2.append("\n SELECT ");
+		subQuery2.append("\n     ROWNUM AS RNUM, ");
+		subQuery2.append("\n     Z.* ");
+		subQuery2.append("\n FROM ( ").append(subQuery1).append(") Z ");
+		subQuery2.append("\n WHERE ROWNUM <= ").append(maxPageNum);
+		
+		StringBuffer query = new StringBuffer();
+		query.append("\n SELECT ");
+		query.append("\n     * ");
+		query.append("\n FROM ( ").append(subQuery2).append(") ");
+		query.append("\n WHERE RNUM >= ").append(minPageNum);
+		
+		try {
+			con = getConn();
+			ps = con.prepareStatement(query.toString());
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				int bid = rs.getInt("BID");
+				String btitle = rs.getString("BTITLE");
+				String bregdate = rs.getString("BREGDATE");
+
+				BoardVO vo = new BoardVO();
+				vo.setBid(bid);
+				vo.setBtitle(btitle);
+				vo.setBregdate(bregdate);
+				result.add(vo);
+			}
+		} catch (SQLSyntaxErrorException e) {
+			System.out.println(subQuery1.toString() + "\n");
+			System.out.println(subQuery2.toString() + "\n");
+			System.out.println(query.toString());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO: SQLException 예외 처리
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: Exception 예외 처리
+			e.printStackTrace();
+		} finally {
+			close(con, ps, rs);
+		}
+		
+		return result;
+	}
 
 	public ArrayList<BoardVO> getBoardList(int btype) {
 		ArrayList<BoardVO> result = new ArrayList<BoardVO>();
@@ -67,8 +174,10 @@ public class BoardDAO {
 			}
 		} catch (SQLException e) {
 			// TODO: SQLException 예외 처리
+			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: Exception 예외 처리
+			e.printStackTrace();
 		} finally {
 			close(con, ps, rs);
 		}
@@ -98,8 +207,10 @@ public class BoardDAO {
 			}
 		} catch (SQLException e) {
 			// TODO: SQLException 예외 처리
+			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: Exception 예외 처리
+			e.printStackTrace();
 		} finally {
 			close(con, ps, null);
 		}
@@ -128,8 +239,10 @@ public class BoardDAO {
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO: SQLException 예외 처리
+			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: Exception 예외 처리
+			e.printStackTrace();
 		} finally {
 			close(con, ps, null);
 		}
@@ -156,8 +269,10 @@ public class BoardDAO {
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO: SQLException 예외 처리
+			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: Exception 예외 처리
+			e.printStackTrace();
 		} finally {
 			close(con, ps, null);
 		}
@@ -185,8 +300,10 @@ public class BoardDAO {
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO: SQLException 예외 처리
+			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO: Exception 예외 처리
+			e.printStackTrace();
 		} finally {
 			close(con, ps, null);
 		}

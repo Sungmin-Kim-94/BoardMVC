@@ -14,8 +14,22 @@ import kr.itedu.boardmvc.common.BoardDAO;
 public class BoardListService {
 	public ArrayList<BoardVO> getBoardList(int btype) {
 		ArrayList<BoardVO> result = null;
-		BoardDAO dao = BoardDAO.getInstance();		
-		result = dao.getBoardList(btype);		
+		BoardDAO dao = BoardDAO.getInstance();
+		result = dao.getBoardList(btype);
+		return result;
+	}
+
+	public ArrayList<BoardVO> getBoardList(int btype, int viewCnt, int pageNum) {
+		ArrayList<BoardVO> result = null;
+		BoardDAO dao = BoardDAO.getInstance();
+		result = dao.getBoardList(btype, viewCnt, pageNum);
+		return result;
+	}
+
+	public int getListCount(int btype) {
+		int result = 0;
+		BoardDAO dao = BoardDAO.getInstance();
+		result = dao.getListCount(btype);
 		return result;
 	}
 }
