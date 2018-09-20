@@ -165,4 +165,23 @@ public class BoardDAO {
 		return result;
 	}
 
+	public int boardDelete(int btype, int bid) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			con = getConn();
+			String query = String.format("", btype);
+		} catch (SQLException e) {
+			// TODO: SQLException 예외 처리
+		} catch (Exception e) {
+			// TODO: Exception 예외 처리
+		} finally {
+			close(con, ps, null);
+		}
+		
+		return result;
+	}
+
 }
