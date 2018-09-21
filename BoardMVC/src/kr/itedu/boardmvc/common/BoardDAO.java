@@ -116,6 +116,7 @@ public class BoardDAO {
 		query.append("\n WHERE RNUM >= ").append(minPageNum);
 		
 		try {
+			System.out.println(query.toString());
 			con = getConn();
 			ps = con.prepareStatement(query.toString());
 			rs = ps.executeQuery();
