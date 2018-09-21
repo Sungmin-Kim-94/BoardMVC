@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.itedu.boardmvc.ActionForward;
 import kr.itedu.boardmvc.common.Utils;
-import kr.itedu.boardmvc.common.Var;
 import kr.itedu.boardmvc.service.BoardDeleteService;
 
 public class BoardDeleteAction implements Action{
