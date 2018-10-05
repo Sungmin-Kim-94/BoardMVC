@@ -16,6 +16,7 @@
 				<div class="b-col b-content">${data.getBcontent()}</div>
 			</div>
 		</div>
+		
 	</div>
 
 	<div class="bottom">
