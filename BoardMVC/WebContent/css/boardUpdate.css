@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-.board-insert, .board-insert * {
+.board-update, .board-update * {
 	margin: 0;
 	padding: 0;
 }
 
-.board-insert {
+.board-update {
 	display: flex;
 	width: 100%;
 	min-height: 500px;
@@ -15,66 +15,61 @@
 	align-items: flex-start;
 }
 
-.board-insert>.b-head, .board-insert>.b-body {
+.board-update>.b-head, .board-update>.b-body {
 	width: 100%;
 }
 
-.board-insert>.b-head {
+.board-update>.b-head {
 	height: 40px;
 }
 
-.board-insert>.b-body {
+.board-update>.b-body {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 }
 
-.board-insert .b-row {
+.board-update .b-row {
 	display: flex;
 	width: 100%;
 	height: 100%;
 	border-bottom: 1px solid black;
 }
 
-.board-insert>.b-body>.b-row {
-	flex: 1;
-}
-
-.board-insert .b-col {
+.board-update .b-col {
 	flex: 1;
 	display: flex;
 	width: 100%;
 	height: 100%;
 }
 
-.board-insert>.b-head .b-col {
+.board-update>.b-head .b-col {
 	align-items: center;
 	font-weight: bold;
 }
 
-.board-insert>.b-head .b-title {
+.board-update>.b-head .b-id {
 	flex: 1;
-	display: flex;
 }
 
-.board-insert>.b-head .b-title>label {
-	width: 60px;
+.board-update>.b-head .b-title {
+	flex: 9;
 }
 
-.board-insert>.b-head .b-title>input {
-	flex: 1; 
+.board-update>.b-head .b-title>input {
+	width: 100%;
 }
 
-.board-insert>.b-body>.b-col {
+.board-update>.b-body>.b-col {
 	align-items: flex-start;
 }
 
-.board-insert>.b-body .b-content {
+.board-update>.b-body .b-content {
 	flex: 1;
 	padding: 10px;
 }
 
-.board-insert>.b-body .b-content>textarea {
+.board-update>.b-body .b-content>textarea {
 	width: 100%;
 	height: 500px;
 }

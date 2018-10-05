@@ -23,7 +23,7 @@ public class BoardDeleteAction implements Action{
 		BoardDeleteService service = new BoardDeleteService();
 		service.boardDelete(btype, bid);
 		
-		forward.setPath("boardList.bo?btype=" + btype);
+		forward.setPath("boardList.bo?btype=" + btype + "&pnum=1");
 		forward.setRedirect(true);
 		
 		return forward;

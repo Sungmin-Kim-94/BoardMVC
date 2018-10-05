@@ -1,2 +1,94 @@
 @charset "UTF-8";
 
+.board-list, .board-list * {
+	margin: 0;
+	padding: 0;
+}
+
+.board-list {
+	display: flex;
+	width: 100%;
+	min-height: 500px;
+	margin: 30px 0;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.board-list>.b-head, .board-list>.b-body {
+	width: 100%;
+}
+
+.board-list .b-row {
+	display: flex;
+	width: 100%;
+	border-bottom: 1px solid black;
+}
+
+.board-list>.b-head * {
+	text-align: center;
+	font-weight: bold;
+}
+
+.board-list .b-row>.b-col {
+	flex: 1;
+	padding: 0.25em 0;
+}
+
+.board-list .b-row>.b-id {
+	flex: 1;
+}
+
+.board-list>.b-body>.b-row>.b-id {
+	text-align: center;
+}
+
+.board-list .b-row>.b-title {
+	flex: 7;
+}
+
+.board-list>.b-body>.b-row>.b-title {
+	text-align: left;
+	overflow: none;
+}
+
+.board-list .b-row>.b-regdate {
+	flex: 2;
+}
+
+.board-list>.b-body>.b-row>.b-regdate {
+	text-align: center;
+}
+
+.board-list>.b-foot>.b-paging {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	list-style: none;
+}
+
+.board-list .b-paging>.pg-item {
+	display: block;
+	width: 30px;
+	height: 30px;
+	margin: 5px;
+}
+
+.b-paging>.pg-item>a {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+}
+
+.b-paging>.pg-item:hover>a {
+	background-color: black;
+	color: white;
+}
+
+.b-paging>.active>a {
+	background-color: red;
+	color: white;
+}

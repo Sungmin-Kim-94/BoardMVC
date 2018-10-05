@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+header {
+	margin: 0 !important;
+}
+
 header>h1 {
 	height: 100px;
+}
+
+ul {
+	list-style: none;
 }

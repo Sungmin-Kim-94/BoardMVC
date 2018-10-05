@@ -31,7 +31,7 @@ public class BoardInsertAction implements Action {
 			BoardInsertService service = new BoardInsertService();
 			service.boardInsert(btype, data);
 			
-			forward.setPath("boardList.bo?btype=" + btype);
+			forward.setPath("boardList.bo?btype=" + btype + "&pnum=1");
 			forward.setRedirect(true);
 		} else {
 			request.setAttribute("title", Var.TITLES[btype]);
